@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Mini App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        .content {
+            margin: 20px 0;
+        }
+        .file-upload {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <!--<img src="https://via.placeholder.com/300x200" alt="Example Image"> -->
+        <p>Здесь вы можете загрузить проект.</p>
+        <div class="file-upload">
+            <label for="fileInput">Загрузить файл:</label>
+            <input type="file" id="fileInput">
+        </div>
+    </div>
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                console.log('Выбран файл:', file.name);
+                // Здесь можно добавить код для обработки загруженного файла
+            }
+        });
+    </script>
+</body>
+</html>
