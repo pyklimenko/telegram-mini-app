@@ -9,6 +9,12 @@ img {
     height: auto;
 }
 
+button {
+    margin: 10px;
+    padding: 10px;
+    font-size: 16px;
+}
+
 .content {
     margin: 20px 0;
 }

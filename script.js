@@ -38,4 +38,25 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Выбран файл:', file.name);
         }
     });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const expandButton = document.getElementById('expandButton');
+        const collapseButton = document.getElementById('collapseButton');
+    
+        if (window.Telegram.WebApp) {
+            Telegram.WebApp.ready();
+    
+            expandButton.addEventListener('click', function() {
+                Telegram.WebApp.expand();
+                expandButton.style.display = 'none';
+                collapseButton.style.display = 'inline';
+            });
+    
+            collapseButton.addEventListener('click', function() {
+                Telegram.WebApp.collapse();
+                collapseButton.style.display = 'none';
+                expandButton.style.display = 'inline';
+            });
+        }
+    });
 });
