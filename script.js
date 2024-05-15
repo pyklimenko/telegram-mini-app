@@ -1,7 +1,22 @@
 document.addEventListener('DOMContentLoaded', function() {
     if (window.Telegram.WebApp) {
         Telegram.WebApp.ready();
-        
+
+        // Получение информации о пользователе
+        const user = Telegram.WebApp.initDataUnsafe.user;
+        if (user) {
+            console.log('Username:', user.username);
+            console.log('First Name:', user.first_name);
+            console.log('Last Name:', user.last_name);
+
+            // Отображение информации на странице
+            const userInfo = document.createElement('div');
+            userInfo.innerHTML = `<p>Username: ${user.username || 'не указан'}</p>
+                                  <p>First Name: ${user.first_name}</p>
+                                  <p>Last Name: ${user.last_name}</p>`;
+            document.body.insertBefore(userInfo, document.body.firstChild);
+        }
+
         // Получение параметров темы
         const themeParams = Telegram.WebApp.themeParams;
         if (themeParams) {
