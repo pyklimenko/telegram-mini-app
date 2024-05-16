@@ -1,3 +1,47 @@
+function openTab(evt, tabName) {
+    var i, tabcontent, tabbuttons;
+    tabcontent = document.getElementsByClassName("tab-content");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tabbuttons = document.getElementsByClassName("tab-button");
+    for (i = 0; i < tabbuttons.length; i++) {
+        tabbuttons[i].className = tabbuttons[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+function load3DModel() {
+    const container = document.getElementById('3d-model-container');
+    const width = container.offsetWidth;
+    const height = container.offsetHeight;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(width, height);
+    container.appendChild(renderer.domElement);
+
+    const loader = new THREE.GLTFLoader();
+    loader.load('Models/model.gltf', function (gltf) {
+        scene.add(gltf.scene);
+    }, undefined, function (error) {
+        console.error(error);
+    });
+
+    const light = new THREE.AmbientLight(0xffffff, 1);
+    scene.add(light);
+
+    camera.position.z = 5;
+
+    function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+    }
+    animate();
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     if (window.Telegram.WebApp) {
         Telegram.WebApp.ready();
@@ -55,55 +99,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    function openTab(evt, tabName) {
-        var i, tabcontent, tabbuttons;
-        tabcontent = document.getElementsByClassName("tab-content");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-        tabbuttons = document.getElementsByClassName("tab-button");
-        for (i = 0; i < tabbuttons.length; i++) {
-            tabbuttons[i].className = tabbuttons[i].className.replace(" active", "");
-        }
-        document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.className += " active";
-    }
-
-    document.addEventListener("DOMContentLoaded", function() {
-        document.querySelector(".tab-button").click();
-    });
-
-    function load3DModel() {
-        const container = document.getElementById('3d-model-container');
-        const width = container.offsetWidth;
-        const height = container.offsetHeight;
-
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize(width, height);
-        container.appendChild(renderer.domElement);
-
-        const loader = new THREE.GLTFLoader();
-        loader.load('Models/model.gltf', function (gltf) {
-            scene.add(gltf.scene);
-        }, undefined, function (error) {
-            console.error(error);
-        });
-
-        const light = new THREE.AmbientLight(0xffffff, 1);
-        scene.add(light);
-
-        camera.position.z = 5;
-
-        function animate() {
-            requestAnimationFrame(animate);
-            renderer.render(scene, camera);
-        }
-        animate();
-    }
-
-    document.addEventListener("DOMContentLoaded", function() {
-        load3DModel();
-    });
+    document.querySelector(".tab-button").click();
+    load3DModel();
 });
