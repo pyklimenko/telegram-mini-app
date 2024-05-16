@@ -23,17 +23,23 @@ function load3DModel() {
     renderer.setSize(width, height);
     container.appendChild(renderer.domElement);
 
+    // Улучшение освещения
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambientLight);
+
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.set(1, 1, 1).normalize();
+    scene.add(directionalLight);
+
     const loader = new THREE.GLTFLoader();
     loader.load('Models/model.gltf', function (gltf) {
         scene.add(gltf.scene);
     }, undefined, function (error) {
-        console.error(error);
+        console.error('An error happened', error);
     });
 
-    const light = new THREE.AmbientLight(0xffffff, 1);
-    scene.add(light);
-
     camera.position.z = 5;
+    camera.position.y = 1; // Добавлено смещение по оси Y для лучшего обзора
 
     function animate() {
         requestAnimationFrame(animate);
