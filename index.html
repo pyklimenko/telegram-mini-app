@@ -7,17 +7,30 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="script.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@three-ts/gltf-loader@0.0.7/index.js"></script>
 </head>
 <body>
-    <div class="content">
+    <div class="tabs">
+        <button class="tab-button" onclick="openTab(event, 'Info')">Info</button>
+        <button class="tab-button" onclick="openTab(event, 'Zadanie')">Задание</button>
+        <button class="tab-button" onclick="openTab(event, 'Uspevaemost')">Успеваемость</button>
+    </div>
+    <div id="Info" class="tab-content">
+        <div id="3d-model-container" class="model-container"></div>
+        <div id="greeting"></div>
+    </div>
+    <div id="Zadanie" class="tab-content">
         <button id="expandButton">Раскрыть</button>
         <button id="collapseButton" style="display: none;">Свернуть</button>
-        <p>Привет! Mini App сейчас в разработке...</p>
         <p>Скоро отсюда можно будет загрузить проект.</p>
         <div class="file-upload">
             <label for="fileInput">Загрузить файл:</label>
             <input type="file" id="fileInput">
         </div>
+    </div>
+    <div id="Uspevaemost" class="tab-content">
+        <p>Информация о успеваемости будет здесь.</p>
     </div>
 </body>
 </html>
