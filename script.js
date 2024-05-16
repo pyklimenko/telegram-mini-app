@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
         container.appendChild(renderer.domElement);
 
         const loader = new THREE.GLTFLoader();
-        loader.load('path/to/your/model.gltf', function (gltf) {
+        loader.load('Models/model.gltf', function (gltf) {
             scene.add(gltf.scene);
         }, undefined, function (error) {
             console.error(error);
